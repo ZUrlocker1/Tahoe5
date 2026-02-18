@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tahoe 5</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div class="brand">
+          <img class="brand-logo" src="./assets/tahoe-5-logo-1.png" alt="Tahoe 5 logo" />
+          <div class="brand-text">
+            <h1>Tahoe 5</h1>
+            <p>Classic Video Poker - Vibe coded in one hour!</p>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="helpBtn" class="btn secondary" type="button" aria-label="Open help">Help (H)</button>
+          <button id="soundBtn" class="btn secondary" type="button" aria-label="Toggle sound">Sound: On (S)</button>
+        </div>
+      </header>
+
+      <section class="status-panel" aria-label="Game status">
+        <div class="status-item">
+          <span>Bet</span>
+          <strong id="betValue">$10</strong>
+          <div class="bet-controls">
+            <button id="betDownBtn" class="btn small" type="button" aria-label="Decrease bet">-</button>
+            <button id="betUpBtn" class="btn small" type="button" aria-label="Increase bet">+</button>
+          </div>
+        </div>
+        <div class="status-item">
+          <span>Balance</span>
+          <strong id="balanceValue">$90</strong>
+        </div>
+        <div class="status-item action-item">
+          <button id="dealDrawBtn" class="btn primary" type="button">Deal (Enter)</button>
+        </div>
+      </section>
+
+      <section class="table-area">
+        <div class="cards" id="cards" aria-label="Hand cards"></div>
+        <aside class="paytable" aria-label="Paytable">
+          <h2>Payoffs (Base @ $10)</h2>
+          <ul id="paytableList"></ul>
+        </aside>
+      </section>
+
+      <section class="result">
+        <p id="resultLine">Press Deal to start.</p>
+        <p id="subLine">Keys: 1-5 hold, arrows bet, Enter deal/draw, S sound, H help, Esc reset.</p>
+      </section>
+    </main>
+
+    <dialog id="helpDialog">
+      <h2>How To Play</h2>
+      <p>1. Adjust your bet before dealing.</p>
+      <p>2. Press Deal, then select cards to Hold.</p>
+      <p>3. Press Draw to replace non-held cards.</p>
+      <p>4. Payout uses classic Tahoe values and bet multiplier.</p>
+      <h3>Keyboard Controls</h3>
+      <p>Enter = Deal/Draw, 1-5 = Hold toggle, Arrows = Bet, S = Sound, H = Help, Esc = Reset</p>
+      <form method="dialog">
+        <button class="btn primary" value="close">Close</button>
+      </form>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

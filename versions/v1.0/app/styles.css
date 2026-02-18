@@ -1,0 +1,503 @@
+:root {
+  --bg: #0b1f16;
+  --bg-alt: #123026;
+  --card: #fffefe;
+  --ink: #14201b;
+  --text: #e8f5ea;
+  --muted: #b7cfbc;
+  --accent: #efbd4a;
+  --accent-2: #d36f2f;
+  --danger: #df5151;
+  --ok: #63d189;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at 20% 20%, #1b493b, var(--bg) 48%);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.brand h1 {
+  margin: 0;
+  line-height: 1;
+  font-family: "Snell Roundhand", "Brush Script MT", "Lucida Handwriting", cursive;
+  letter-spacing: 0.02em;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #f8e8c3;
+  text-shadow: 0 1px 0 #67231e, 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.brand p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-text {
+  display: grid;
+}
+
+.brand-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 244, 213, 0.45);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  justify-self: start;
+  align-self: start;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.status-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.status-item {
+  background: linear-gradient(180deg, #0d2a1f, var(--bg-alt));
+  border: 1px solid #2f5b4b;
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+.status-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.status-item strong {
+  font-size: 1.4rem;
+}
+
+.action-item {
+  display: grid;
+  align-content: center;
+}
+
+.bet-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  border: 1px solid #6d8652;
+  background: #25381d;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  filter: brightness(1.12);
+}
+
+.btn.primary {
+  background: linear-gradient(180deg, #a9791b, #8a5d15);
+  border-color: #cc9f44;
+  color: #fff6db;
+}
+
+.btn.secondary {
+  background: #243b33;
+  border-color: #3d6355;
+}
+
+.btn.small {
+  padding: 0.2rem 0.65rem;
+}
+
+.table-area {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+
+.cards {
+  min-height: 260px;
+  border: 1px solid #2a5745;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0e2f23 0%, #123f2f 100%);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(90px, 1fr));
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.card-column {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.35rem;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.1rem;
+}
+
+.slot-number {
+  font-weight: 700;
+  color: #d3e5da;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.hold-outside {
+  color: #f2cc6d;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  min-height: 0.9rem;
+  line-height: 0.9rem;
+  text-align: center;
+}
+
+.card-slot {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 10px;
+  min-height: 210px;
+  padding: 0;
+  display: block;
+  border: 2px solid #dbd8ce;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-column.is-held .card-slot {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(239, 189, 74, 0.25);
+}
+
+.card-slot.is-dealing {
+  animation: dealIn 220ms ease-out;
+}
+
+.card-slot.is-draw-back {
+  animation: flipToBack 180ms ease-out forwards;
+}
+
+.card-slot.is-draw-reveal {
+  animation: revealFromBack 240ms ease-out;
+}
+
+@keyframes dealIn {
+  from {
+    transform: translateY(-5px) scale(0.97);
+    opacity: 0.88;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flipToBack {
+  from {
+    transform: rotateY(0deg) scale(1);
+  }
+  45% {
+    transform: rotateY(88deg) scale(0.98);
+  }
+  to {
+    transform: rotateY(0deg) scale(1);
+  }
+}
+
+@keyframes revealFromBack {
+  from {
+    transform: rotateY(82deg) scale(0.98);
+    filter: saturate(0.9) brightness(0.95);
+  }
+  to {
+    transform: rotateY(0deg) scale(1);
+    filter: saturate(1) brightness(1);
+  }
+}
+
+.card-slot.red {
+  color: #bc2430;
+}
+
+.card-corner {
+  position: absolute;
+  font-weight: 800;
+  line-height: 0.95;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.card-corner.top {
+  top: 8px;
+  left: 8px;
+}
+
+.card-corner.bottom {
+  right: 8px;
+  bottom: 8px;
+  transform: rotate(180deg);
+}
+
+.card-corner .rank {
+  font-size: 1.5rem;
+}
+
+.card-corner .suit {
+  font-size: 1.35rem;
+}
+
+.card-body {
+  position: absolute;
+  inset: 10% 10% 10% 10%;
+  display: grid;
+  place-items: center;
+}
+
+.pip-field {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+.pip {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.pip.invert {
+  transform: rotate(180deg);
+}
+
+.court-wrap {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fffefe;
+}
+
+.court-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.ace-art {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: radial-gradient(circle at center, #ffffff 0%, #fffefe 62%, #fbfbfb 100%);
+  display: grid;
+  place-items: center;
+}
+
+.ace-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.ace-logo-center {
+  width: 62px;
+  height: 62px;
+  border-radius: 10px;
+}
+
+.ace-symbol {
+  font-size: 4.2rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.ace-ribbon {
+  display: none;
+}
+
+.card-back {
+  position: absolute;
+  inset: 8px;
+  border-radius: 8px;
+  background-image: url("./assets/tahoe-5-back.jpg");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #274f87;
+}
+
+.paytable {
+  border: 1px solid #3f6655;
+  border-radius: 12px;
+  padding: 0.8rem;
+  background: rgba(9, 27, 19, 0.72);
+}
+
+.paytable h2 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.paytable ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.paytable li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.18rem 0;
+  color: var(--muted);
+}
+
+.paytable li.win {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.result {
+  margin-top: 1rem;
+  border: 1px solid #315a4b;
+  border-radius: 10px;
+  padding: 0.8rem;
+  background: rgba(9, 30, 21, 0.7);
+}
+
+.result p {
+  margin: 0.35rem 0;
+}
+
+#resultLine.is-win {
+  color: var(--ok);
+}
+
+#resultLine.is-loss {
+  color: var(--danger);
+}
+
+#helpDialog {
+  border: 1px solid #2d4a3f;
+  border-radius: 12px;
+  max-width: 640px;
+}
+
+#helpDialog::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+@media (max-width: 900px) {
+  .table-area {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-logo {
+    width: 58px;
+    height: 58px;
+  }
+
+  .brand h1 {
+    font-size: 2.4rem;
+  }
+
+  .brand p {
+    font-size: 0.86rem;
+  }
+
+  .status-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    grid-template-columns: repeat(5, minmax(58px, 1fr));
+    min-height: auto;
+  }
+
+  .card-slot {
+    min-height: 145px;
+  }
+
+  .slot-number {
+    font-size: 0.8rem;
+  }
+
+  .hold-outside {
+    font-size: 0.64rem;
+  }
+
+  .card-corner .rank {
+    font-size: 1.2rem;
+  }
+
+  .card-corner .suit {
+    font-size: 1.05rem;
+  }
+
+  .pip {
+    font-size: 1.2rem;
+  }
+
+  .ace-symbol {
+    font-size: 2.6rem;
+  }
+
+  .ace-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ace-logo-center {
+    width: 44px;
+    height: 44px;
+  }
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tahoe 5</title>
+    <link rel="stylesheet" href="./styles.css?v=1.5.0" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div class="brand">
+          <img class="brand-logo" src="./assets/tahoe-5-logo-1.png" alt="Tahoe 5 logo" />
+          <div class="brand-text">
+            <h1>Tahoe 5</h1>
+            <p>Classic Video Poker<span class="subtitle-break"><span class="subtitle-dash"> - </span>Vibe coded in one hour!</span></p>
+          </div>
+        </div>
+        <div class="header-action">
+          <button id="dealDrawBtn" class="btn primary" type="button">Deal (Enter)</button>
+        </div>
+      </header>
+
+      <section class="table-area">
+        <div class="cards" id="cards" aria-label="Hand cards"></div>
+        <aside class="paytable" aria-label="Paytable">
+          <h2>Payoffs (Base @ $10)</h2>
+          <ul id="paytableList"></ul>
+        </aside>
+      </section>
+
+      <section class="status-row" aria-label="Game status and result">
+        <section class="status-panel" aria-label="Game status">
+          <div class="status-item bet-item">
+            <span>Bet</span>
+            <strong id="betValue">$10</strong>
+            <div class="bet-controls">
+              <button id="betDownBtn" class="btn small" type="button" aria-label="Decrease bet">-</button>
+              <button id="betUpBtn" class="btn small" type="button" aria-label="Increase bet">+</button>
+            </div>
+          </div>
+          <div class="status-item balance-item">
+            <span>Balance</span>
+            <strong id="balanceValue">$90</strong>
+          </div>
+        </section>
+
+        <section class="result">
+          <p id="resultLine">Press Deal to start.</p>
+          <p id="subLine">Keys: 1-5 hold, arrows bet, Enter/Space deal/draw, S sound, H help, Esc reset.</p>
+        </section>
+      </section>
+
+      <section class="utility-panel">
+        <div class="controls">
+          <div class="control-buttons">
+            <button id="aboutBtn" class="btn secondary" type="button" aria-label="Open about">About (A)</button>
+            <button id="helpBtn" class="btn secondary" type="button" aria-label="Open help">Help (H)</button>
+            <button id="soundBtn" class="btn secondary" type="button" aria-label="Toggle sound">Sound: On (S)</button>
+          </div>
+          <div class="utility-meta">
+            <span id="versionTag" class="header-version">V1.5</span>
+            <p class="header-copyright">Copyright (C) 1992-2026 M. Zack Urlocker</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="helpDialog">
+      <h2>How To Play</h2>
+      <p>1. Adjust your bet before dealing.</p>
+      <p>2. Press Deal, then select cards to Hold.</p>
+      <p>3. Press Draw to replace non-held cards.</p>
+      <p>4. Payout uses classic Tahoe values and bet multiplier.</p>
+      <h3>Keyboard Controls</h3>
+      <p>Enter/Space = Deal/Draw, 1-5 = Hold toggle, Arrows = Bet, S = Sound, H = Help, Esc = Reset</p>
+      <form method="dialog">
+        <button class="btn primary" value="close">Close</button>
+      </form>
+    </dialog>
+
+    <dialog id="aboutDialog">
+      <h2>About</h2>
+      <img class="about-logo" src="./assets/tahoe-5-logo-1.png" alt="Tahoe 5 logo" />
+      <p>This is based on a shareware game I published in 1992 for DOS, Windows and Atari Portfolio. Fortunately, I lost the source code long ago!</p>
+      <p>Last summer, I coded a text version using Turbo Pascal 4.0 in a DOS Box with some ChatGPT help. I wrote most of the code (~600 lines) by hand. ChatGPT wrote a good shuffle algorithm and some music routines. The latter didn't work and had to be corrected by hand.</p>
+      <p>Now with ChatGPT 5.3 and the CodeX app, I created a PRD from the Pascal code. Then I had it generate a VS Code project. It created the JavaScript app (~700 lines) and related html and css files (another 700 lines.) It compiled and ran first time! I added graphics for the cards and then made changes via CodeX prompts generating a few hundred more lines of code.</p>
+      <p>I did not write or review any code. It just worked!</p>
+      <form method="dialog">
+        <button class="btn primary" value="close">Close</button>
+      </form>
+    </dialog>
+
+    <script src="./app.js?v=1.5.0"></script>
+  </body>
+</html>
