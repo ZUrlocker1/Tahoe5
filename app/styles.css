@@ -136,20 +136,32 @@ body {
   text-decoration: underline;
 }
 
+.header-promo a:visited,
+.header-promo a:hover,
+.header-promo a:active {
+  color: #f2cc6d;
+  text-decoration: underline;
+}
+
 .header-version {
   margin: 0.12rem 0 0;
   color: var(--muted);
   font-size: 0.88rem;
-  text-align: left;
+  text-align: right;
 }
 
 .utility-meta {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-end;
   gap: 0.5rem;
-  flex-wrap: wrap;
+}
+
+.utility-meta-right {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
 }
 
 .about-source-link {
@@ -610,9 +622,13 @@ body {
   }
 
   .utility-meta {
-    justify-content: flex-end;
-    width: auto;
-    margin-left: auto;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .utility-meta-right {
+    gap: 0.4rem;
   }
 }
 

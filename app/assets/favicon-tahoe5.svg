@@ -1,4 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="28" fill="#b20d0d" stroke="#f4f4f4" stroke-width="2" />
-  <text x="32" y="43" text-anchor="middle" font-size="36" font-family="Arial, sans-serif" font-weight="700" fill="#ffffff">5</text>
+  <path
+    d="M32 56C20 47 8 38 8 24C8 16.5 14 11 21 11C26 11 30 13.5 32 17C34 13.5 38 11 43 11C50 11 56 16.5 56 24C56 38 44 47 32 56Z"
+    fill="#b20d0d"
+    stroke="#f4f4f4"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+  <text x="32" y="40" text-anchor="middle" font-size="32" font-family="Arial, sans-serif" font-weight="700" fill="#ffffff">T</text>
 </svg>
