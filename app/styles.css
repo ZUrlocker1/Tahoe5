@@ -124,6 +124,18 @@ body {
   text-align: right;
 }
 
+.header-promo {
+  margin: 0.12rem 0 0;
+  color: #f2cc6d;
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+.header-promo a {
+  color: #f2cc6d;
+  text-decoration: underline;
+}
+
 .header-version {
   margin: 0.12rem 0 0;
   color: var(--muted);
@@ -137,6 +149,12 @@ body {
   justify-content: space-between;
   align-items: baseline;
   gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.about-source-link {
+  color: #4b8dff;
+  text-decoration: underline;
 }
 
 .status-panel {
@@ -639,6 +657,7 @@ body {
   }
 
   .header-copyright,
+  .header-promo,
   .header-version {
     font-size: 0.74rem;
   }
@@ -859,6 +878,7 @@ body {
   }
 
   .header-copyright,
+  .header-promo,
   .header-version {
     font-size: 0.66rem;
     margin-top: 0.05rem;
