@@ -4,11 +4,10 @@
 Web-Based Video Poker
 
 ## Document Control
-- Version: 1.1
+- Version: 1.5
 - Date: February 12, 2026
-- Author: Product Team
 - Status: Draft (Revised with Turbo Pascal legacy feature parity)
-- Legacy Reference: `/Users/urlocker/Downloads/Vibe1/TP Original/TAHOE5D.PAS`
+- Legacy Reference: `/Users/urlocker/Downloads/Tahoe5/TP Original/TAHOE5D.PAS`
 
 ## 1. Overview
 This product is a browser-based video poker game that delivers a fast, casino-style single-player experience with fair randomization, responsive controls, and optional account-based progression.
@@ -113,28 +112,6 @@ Many web poker experiences feel outdated, slow, or untrustworthy due to poor UX 
 - Intro screen and help content included in web form.
 - Help overlay must not clear current hold state when closed.
 
-### 6.6 Accounts and Persistence
-- Guest mode required.
-- Optional account mode for cloud sync.
-- Persist:
-  - Balance model preference (classic/modern)
-  - Sound setting
-  - Session/lifetime stats
-- In guest mode, store local state in browser storage.
-
-### 6.7 Fairness and Transparency
-- Publish exact hand-ranking rules and paytable values.
-- Server-authoritative shuffle/deal/draw/evaluate in production mode.
-- Display result details and payout math for each hand.
-- Audit log hand events for debugging and dispute handling.
-
-### 6.8 Admin and Operations
-- Admin configuration for:
-  - Paytable values
-  - Economy values (start balance, ante, bet step, bailout amount)
-  - Win-sound thresholds
-  - Taunt messaging enable/disable
-  - Feature flags (Classic Mode default on/off)
 
 ## 7. Non-Functional Requirements
 - Performance: first interactive screen < 2.5s on mid-tier mobile network.
@@ -211,47 +188,8 @@ Many web poker experiences feel outdated, slow, or untrustworthy due to poor UX 
 - Additional poker variants.
 - Native mobile apps.
 
-## 11. Milestones
-1. Legacy Mapping and UX Spec (1 week)
-- Confirm parity rules from Turbo Pascal source
-- Define Classic Mode state diagram
-- Approve responsive wireframes
 
-2. MVP Build (5 weeks)
-- Implement game engine and parity test fixtures
-- Build web client controls and overlays
-- Implement audio, payouts, and economy configuration
-
-3. QA and Soft Launch (2 weeks)
-- Golden test suite against legacy expected hands/scores
-- Input parity testing (keyboard and touch)
-- Telemetry and balancing review
-
-4. Public Launch
-- Controlled rollout
-- Monitor bailout frequency, win distribution, and session quality
-
-## 12. Risks and Mitigations
-- Risk: Legacy economy feels punitive or confusing to new users.
-- Mitigation: expose Classic vs Modern economy preset; clear payout math.
-
-- Risk: Help overlay/state bugs regress hold behavior.
-- Mitigation: explicit UI state tests to confirm holds persist after help close.
-
-- Risk: Audio annoys users.
-- Mitigation: instant mute toggle and persisted preference.
-
-- Risk: Perceived unfairness.
-- Mitigation: transparent rules, visible paytable, and server-side auditability.
-
-## 13. Open Questions
-- Should Classic Mode be default for all users or only returning users?
-- Should bailout taunt text ship enabled, disabled, or region-dependent?
-- Should "Only a pair" (below Jacks) have explicit zero payout messaging?
-- Do we keep exact legacy starting balance/ante defaults (`$90`/`$10`) globally?
-- Is a separate "Modern Mode" economy required at MVP or post-MVP?
-
-## 14. Appendix
+## 11. Appendix
 ### A. Legacy Tahoe Paytable (Base Score at $10 Bet)
 - Royal Flush: 2500
 - Straight Flush: 500
@@ -264,17 +202,10 @@ Many web poker experiences feel outdated, slow, or untrustworthy due to poor UX 
 - Jacks or Better: 10
 - Other outcomes: 0 payout (hand loss)
 
-### B. Legacy Control Mapping
-- `Enter`: deal, draw, and continue prompts
-- `1-5`: hold toggles
-- Arrow keys: bet up/down
-- `S`: sound on/off
-- `H`: help
-- `Esc`: quit
 
-### C. Legacy Audio Intent
-- Start cue
-- Toggle beep
-- Win cue
-- Great win cue
-- Losing cue
+
+## 12. Future Native Mac / iPhone version
+- Implement as a shared SwiftUI codebase built with Xcode, with iPhone and macOS targets from one project.
+- Keep gameplay/state behavior equivalent to the web version, including hold flow, payout logic, and hidden test/dev shortcuts.
+- For iPhone portrait, preserve the same high-level panel order used in Tahoe5: header/brand and primary action at top, player cards / hold area next, then bet/balance/status, then utility buttons for About, Help, Sound.
+- Expect native-specific work for Apple signing/provisioning, TestFlight/App Store packaging, desktop keyboard shortcut parity, and platform audio/haptics wiring.
