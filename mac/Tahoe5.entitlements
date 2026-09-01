@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- The sandbox. Required for the Mac App Store, and ignored on iOS, which
+         sandboxes every app regardless — so one entitlements file covers both
+         platforms.
+
+         Exactly one exception below, and it is not what it looks like. No file
+         access, no hardware, no user data. -->
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+
+    <!-- Required for WKWebView, even though this app never makes a network
+         request. WebKit runs its networking in a separate XPC process, and in a
+         sandboxed app that process cannot be brought up without this. Without
+         it the web view loads nothing and the window renders plain white — no
+         error, no delegate callback, no log line.
+
+         This does NOT give the game network access it uses. Every byte it
+         displays is read out of the app bundle by BundleSchemeHandler over a
+         custom URL scheme; there is no http(s) request anywhere in the code or
+         in Web/. -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+</dict>
+</plist>

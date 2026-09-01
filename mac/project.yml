@@ -1,0 +1,81 @@
+name: Tahoe5
+
+options:
+  bundleIdPrefix: com.zurlocker
+  xcodeVersion: "26.0"
+  generateEmptyDirectories: false
+  defaultConfig: Debug
+
+targets:
+
+  Tahoe5:
+    type: application
+    # One target, three devices. `supportedDestinations` produces an Xcode
+    # multiplatform app: a single bundle ID across Mac and iOS means one App
+    # Store listing and Universal Purchase, so somebody who buys it on the Mac
+    # gets the iPhone and iPad build too. Two separate targets would mean two
+    # listings and two reviews for what is the same game.
+    supportedDestinations: [macOS, iOS]
+    sources:
+      - path: Sources
+        excludes:
+          # Referenced through INFOPLIST_FILE. Left in `sources` it would also be
+          # copied into Resources, which makes codesign fail on a duplicate.
+          - Info.plist
+      # A folder reference, not a group. The game loads "./assets/king.jpg" and
+      # "./styles.css" by relative path; Xcode's default resource handling
+      # flattens directories and every one of those would 404.
+      - path: Web
+        type: folder
+    settings:
+      base:
+        # Swift 5 language mode deliberately. This is a ~200-line shell around a
+        # web view, and Swift 6's strict concurrency checking has opinions about
+        # WebKit's delegate protocols that would cost more to satisfy than the
+        # safety is worth here.
+        SWIFT_VERSION: "5.0"
+        # Set here rather than through XcodeGen's `deploymentTarget:` key, which
+        # it silently drops on a `supportedDestinations` target — the generated
+        # project came out with no deployment target at all, and Info.plist reads
+        # $(MACOSX_DEPLOYMENT_TARGET) for LSMinimumSystemVersion.
+        #
+        # macOS 14 / iOS 17: old enough to cover any device still getting
+        # updates, new enough for the WebKit behaviour this relies on.
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+        PRODUCT_NAME: Tahoe5
+        PRODUCT_BUNDLE_IDENTIFIER: com.zurlocker.Tahoe5
+        INFOPLIST_FILE: Sources/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        # CURRENT_PROJECT_VERSION must increase for every build uploaded to App
+        # Store Connect, even a re-upload of the same MARKETING_VERSION.
+        CURRENT_PROJECT_VERSION: "2"
+        MARKETING_VERSION: "2.0"
+        # iPhone and iPad.
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_ENTITLEMENTS: Tahoe5.entitlements
+        # Automatic signing, unlike GCI. GCI ships Developer ID through a DMG,
+        # where manual control matters. This goes to the App Store, where Xcode
+        # managing the Mac App Store and iOS App Store profiles for one bundle
+        # ID across two platforms is the whole reason automatic exists.
+        DEVELOPMENT_TEAM: K66MA9TR8Z
+        CODE_SIGN_STYLE: Automatic
+        ENABLE_HARDENED_RUNTIME: YES
+        SUPPORTS_MACCATALYST: NO
+        DEAD_CODE_STRIPPING: YES
+        ENABLE_USER_SCRIPT_SANDBOXING: YES
+
+schemes:
+  Tahoe5:
+    build:
+      targets:
+        Tahoe5: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

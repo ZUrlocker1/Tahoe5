@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleName</key>
+    <string>Tahoe5</string>
+    <key>CFBundleDisplayName</key>
+    <string>Tahoe5</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <!-- REQUIRED for the iOS App Store. Xcode injects this automatically only
+         when it generates the plist; this target supplies its own, so without
+         it every iOS upload is rejected with "Missing Info.plist value
+         CFBundleIconName". macOS was unaffected — Xcode injects it there. -->
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.card-games</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2026 Zack Urlocker. All rights reserved.</string>
+
+    <!-- Answers the export-compliance question in App Store Connect once, here,
+         instead of every single time you upload a build. False is correct: the
+         app has no network code and no cryptography of its own. -->
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+
+    <!-- ── macOS ───────────────────────────────────────────────────────────
+         NSPrincipalClass is deliberately absent. Xcode's macOS-only template
+         sets it to NSApplication, but this is a multiplatform target and the
+         SwiftUI App lifecycle installs the right one on each platform. -->
+    <key>LSMinimumSystemVersion</key>
+    <string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+
+    <!-- ── iOS ─────────────────────────────────────────────────────────────
+         UILaunchScreen is not optional. Without it iOS runs the app in a
+         letterboxed compatibility mode with black bars, at the wrong size.
+         It must also carry a colour — see below. -->
+    <key>UILaunchScreen</key>
+    <dict>
+        <!-- Without a colour here the launch screen uses the system default,
+             which is WHITE. That produced a white frame before the felt
+             appeared — the startup flash, happening before WebKit is even
+             involved. LaunchBackground is #0b1f16, the table felt. -->
+        <key>UIColorName</key>
+        <string>LaunchBackground</string>
+    </dict>
+    <!-- Both orientations. The stylesheet already has a portrait layout and
+         app.js switches on matchMedia("(orientation: portrait)"), so rotation
+         is handled — no reason to lock it. -->
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <!-- The game is a responsive layout, so it survives being resized in iPad
+         Split View. No reason to demand the full screen. -->
+    <key>UIRequiresFullScreen</key>
+    <false/>
+</dict>
+</plist>

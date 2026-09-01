@@ -1,0 +1,1155 @@
+:root {
+  --bg: #0b1f16;
+  --bg-alt: #123026;
+  --card: #fffefe;
+  --ink: #14201b;
+  --text: #e8f5ea;
+  --muted: #b7cfbc;
+  --accent: #efbd4a;
+  --danger: #df5151;
+  --ok: #63d189;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at 20% 20%, #1b493b, var(--bg) 48%);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.brand h1 {
+  margin: 0;
+  line-height: 1;
+  font-family: "Snell Roundhand", "Brush Script MT", "Lucida Handwriting", cursive;
+  letter-spacing: 0.02em;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #f8e8c3;
+  text-shadow: 0 1px 0 #67231e, 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.brand p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1.05rem;
+}
+
+.brand-text {
+  display: grid;
+  padding-left: 0.1rem;
+}
+
+.brand-logo {
+  width: 162px;
+  height: 162px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 244, 213, 0.45);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  justify-self: start;
+  align-self: start;
+}
+
+.controls {
+  display: grid;
+  justify-items: end;
+  gap: 0.3rem;
+}
+
+.header-action {
+  align-self: start;
+}
+
+.header-action .btn {
+  width: 12.8rem;
+  min-height: 46px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  line-height: 1.1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.subtitle-break {
+  display: inline;
+}
+
+.subtitle-dash {
+  display: inline;
+}
+
+.utility-panel {
+  margin-bottom: 0.75rem;
+  align-self: flex-end;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.header-copyright {
+  margin: 0.12rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+.header-promo {
+  margin: 0.12rem 0 0;
+  color: #f2cc6d;
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+.header-promo a {
+  color: #f2cc6d;
+  text-decoration: underline;
+}
+
+.header-promo a:visited,
+.header-promo a:hover,
+.header-promo a:active {
+  color: #f2cc6d;
+  text-decoration: underline;
+}
+
+.header-version {
+  margin: 0.12rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+.utility-meta {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.utility-meta-right {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.about-source-link {
+  color: #4b8dff;
+  text-decoration: underline;
+}
+
+.status-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(118px, 160px));
+  gap: 0.75rem;
+  margin-bottom: 0;
+  width: fit-content;
+  flex: 0 0 auto;
+}
+
+.status-item {
+  background: linear-gradient(180deg, #0d2a1f, var(--bg-alt));
+  border: 1px solid #2f5b4b;
+  border-radius: 10px;
+  padding: 0.65rem;
+}
+
+.status-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.status-item strong {
+  font-size: 1.4rem;
+}
+
+.bet-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  border: 1px solid #6d8652;
+  background: #25381d;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+}
+
+/* Only real pointers get a hover state. On iOS a tap on a hover-styled
+   element can be spent applying that state instead of firing the click, which
+   is why About/Help sometimes needed two or three taps. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    filter: brightness(1.12);
+  }
+}
+
+/* Opts out of double-tap-to-zoom on controls, so WebKit dispatches the click
+   immediately instead of waiting to see if a second tap follows. */
+.btn,
+.card-slot,
+.header-promo a {
+  touch-action: manipulation;
+}
+
+.btn.primary {
+  background: linear-gradient(180deg, #a9791b, #8a5d15);
+  border-color: #cc9f44;
+  color: #fff6db;
+}
+
+.btn.secondary {
+  background: #243b33;
+  border-color: #3d6355;
+}
+
+.btn.small {
+  padding: 0.2rem 0.65rem;
+}
+
+.table-area {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+
+.status-row {
+  display: flex;
+  gap: 0.85rem;
+  align-items: stretch;
+  margin-top: 0.75rem;
+}
+
+.cards {
+  min-height: 260px;
+  border: 1px solid #2a5745;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0e2f23 0%, #123f2f 100%);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(90px, 1fr));
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.card-column {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.35rem;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 1.1rem;
+}
+
+.slot-number {
+  font-weight: 700;
+  color: #d3e5da;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.hold-outside {
+  color: #f2cc6d;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  min-height: 0.9rem;
+  line-height: 0.9rem;
+  text-align: center;
+}
+
+.card-slot {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 10px;
+  min-height: 210px;
+  padding: 0;
+  display: block;
+  border: 2px solid #dbd8ce;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-column.is-held .card-slot {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(239, 189, 74, 0.25);
+}
+
+.card-slot.is-dealing {
+  animation: dealIn 220ms ease-out;
+}
+
+.card-slot.is-draw-back {
+  animation: flipToBack 180ms ease-out forwards;
+}
+
+.card-slot.is-draw-reveal {
+  animation: revealFromBack 240ms ease-out;
+}
+
+@keyframes dealIn {
+  from {
+    transform: translateY(-5px) scale(0.97);
+    opacity: 0.88;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flipToBack {
+  from {
+    transform: rotateY(0deg) scale(1);
+  }
+  45% {
+    transform: rotateY(88deg) scale(0.98);
+  }
+  to {
+    transform: rotateY(0deg) scale(1);
+  }
+}
+
+@keyframes revealFromBack {
+  from {
+    transform: rotateY(82deg) scale(0.98);
+    filter: saturate(0.9) brightness(0.95);
+  }
+  to {
+    transform: rotateY(0deg) scale(1);
+    filter: saturate(1) brightness(1);
+  }
+}
+
+.card-slot.red {
+  color: #bc2430;
+}
+
+.card-corner {
+  position: absolute;
+  font-weight: 800;
+  line-height: 0.95;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.card-corner.top {
+  top: 8px;
+  left: 8px;
+}
+
+.card-corner.bottom {
+  right: 8px;
+  bottom: 8px;
+  transform: rotate(180deg);
+}
+
+.card-corner .rank {
+  font-size: 1.5rem;
+}
+
+.card-corner .suit {
+  font-size: 1.35rem;
+}
+
+.card-body {
+  position: absolute;
+  inset: 10% 10% 10% 10%;
+  display: grid;
+  place-items: center;
+}
+
+.pip-field {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+.pip {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.pip.invert {
+  transform: rotate(180deg);
+}
+
+.court-wrap {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fffefe;
+}
+
+.court-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.ace-art {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: radial-gradient(circle at center, #ffffff 0%, #fffefe 62%, #fbfbfb 100%);
+  display: grid;
+  place-items: center;
+}
+
+.ace-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.ace-logo-center {
+  width: 62px;
+  height: 62px;
+  border-radius: 10px;
+}
+
+.ace-ribbon {
+  display: none;
+}
+
+.card-back {
+  position: absolute;
+  inset: 8px;
+  border-radius: 8px;
+  background-image: url("./assets/tahoe-5-back.jpg");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #274f87;
+}
+
+.paytable {
+  border: 1px solid #3f6655;
+  border-radius: 12px;
+  padding: 0.8rem;
+  background: rgba(9, 27, 19, 0.72);
+}
+
+.paytable h2 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.paytable ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.paytable li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.18rem 0;
+  color: var(--muted);
+}
+
+.paytable li.win {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.result {
+  margin-top: 0;
+  border: 1px solid #315a4b;
+  border-radius: 10px;
+  padding: 0.8rem;
+  background: rgba(9, 30, 21, 0.7);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.result p {
+  margin: 0.35rem 0;
+}
+
+#resultLine.is-win {
+  color: var(--ok);
+}
+
+#resultLine.is-loss {
+  color: var(--danger);
+}
+
+#helpDialog {
+  border: 1px solid #2d4a3f;
+  border-radius: 12px;
+  max-width: 640px;
+}
+
+#aboutDialog {
+  border: 1px solid #2d4a3f;
+  border-radius: 12px;
+  width: min(50vw, 640px);
+  max-width: 640px;
+  min-width: 0;
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 1.2rem;
+}
+
+#aboutDialog p:first-of-type {
+  padding-right: 7.2rem;
+}
+
+.about-logo {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 244, 213, 0.5);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  margin: 0;
+}
+
+#helpDialog::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+#aboutDialog::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+/* Phone layout. 700px keeps it off tablets in portrait: widest phone is 430,
+   narrowest iPad is 744. Landscape keeps the 900 cut. */
+/* Phone layout. Portrait is gated at 700px (widest phone 430, narrowest iPad
+   744). Landscape additionally requires a short viewport: a phone in
+   landscape is ~400px tall, whereas a small Mac window can be 900x650 and
+   must keep the desktop two-column layout rather than the phone stack. */
+@media (max-width: 700px), (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  .table-area {
+    display: contents;
+  }
+
+  .cards {
+    order: 2;
+  }
+
+  .topbar {
+    order: 1;
+  }
+
+  .status-row {
+    order: 3;
+  }
+
+  .paytable {
+    order: 4;
+    margin-top: 0.2rem;
+  }
+
+  .result {
+    text-align: right;
+    margin-top: 0.55rem;
+  }
+
+  .status-panel {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    margin-top: 0.55rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .bet-controls .btn.small {
+    min-height: 42px;
+    min-width: 42px;
+    padding: 0.28rem 0.62rem;
+    font-size: 0.96rem;
+    font-weight: 700;
+  }
+
+  .utility-panel {
+    order: 5;
+    align-self: stretch;
+    margin-bottom: 0;
+  }
+
+  .controls {
+    justify-items: stretch;
+    gap: 0.45rem;
+  }
+
+  .control-buttons {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+
+  .control-buttons .btn {
+    flex: 1 1 0;
+    text-align: center;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+  }
+
+  .header-copyright {
+    text-align: right;
+    padding-right: 0.1rem;
+  }
+
+  .utility-meta {
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .utility-meta-right {
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 700px) {
+  #aboutDialog {
+    width: 92vw;
+    max-width: 92vw;
+  }
+
+  #aboutDialog p:first-of-type {
+    padding-right: 5.6rem;
+  }
+
+  .about-logo {
+    width: 66px;
+    height: 66px;
+    top: 0.85rem;
+    right: 0.85rem;
+  }
+
+  .topbar {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 0.65rem;
+  }
+
+  .header-action {
+    justify-self: end;
+  }
+
+  .brand-logo {
+    width: 129px;
+    height: 129px;
+  }
+
+  .brand h1 {
+    font-size: 2.4rem;
+  }
+
+  .brand p {
+    font-size: 0.86rem;
+  }
+
+  .header-copyright,
+  .header-promo,
+  .header-version {
+    font-size: 0.74rem;
+  }
+
+  .status-panel {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+
+  .cards {
+    grid-template-columns: repeat(5, minmax(58px, 1fr));
+    min-height: auto;
+  }
+
+  .card-slot {
+    min-height: 145px;
+  }
+
+  .slot-number {
+    font-size: 0.8rem;
+  }
+
+  .hold-outside {
+    font-size: 0.64rem;
+  }
+
+  .card-corner .rank {
+    font-size: 1.2rem;
+  }
+
+  .card-corner .suit {
+    font-size: 1.05rem;
+  }
+
+  .pip {
+    font-size: 1.2rem;
+  }
+
+  .ace-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ace-logo-center {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  .app {
+    padding-top: 0.5rem;
+  }
+
+  .topbar {
+    margin-bottom: 0.16rem;
+  }
+
+  .brand h1 {
+    font-size: 2.1rem;
+  }
+
+  .brand p {
+    font-size: 0.74rem;
+    font-size: clamp(0.74rem, -2.944px + 2.24svh, 0.88rem);
+    margin-top: 0.12rem;
+  }
+
+  .brand-logo {
+    width: 88px;
+    height: 88px;
+  }
+
+  .subtitle-break {
+    display: block;
+  }
+
+  .subtitle-dash {
+    display: none;
+  }
+
+  .header-action .btn {
+    width: 7.2rem;
+    margin-top: -0.63rem;
+  }
+
+  .table-area {
+    gap: 0.45rem;
+  }
+
+  .cards {
+    grid-template-columns: repeat(5, minmax(52px, 1fr));
+    gap: 0.35rem;
+    padding: 0.45rem;
+  }
+
+  .card-slot {
+    min-height: 112px;
+  }
+
+  .card-corner.top {
+    top: 5px;
+    left: 5px;
+  }
+
+  .card-corner.bottom {
+    right: 5px;
+    bottom: 5px;
+  }
+
+  .card-corner .rank {
+    font-size: 0.95rem;
+  }
+
+  .card-corner .suit {
+    font-size: 0.82rem;
+  }
+
+  .card-body {
+    inset: 20% 12% 18% 12%;
+  }
+
+  .pip-field {
+    row-gap: 0;
+  }
+
+  .pip {
+    font-size: 0.9rem;
+  }
+
+  .court-wrap {
+    border-radius: 6px;
+  }
+
+  .ace-logo-center {
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+  }
+
+  .status-row {
+    gap: 0.5rem;
+    margin-top: 0.45rem;
+  }
+
+  .status-panel {
+    grid-template-columns: minmax(86px, 104px) minmax(72px, 84px);
+    gap: 0.45rem;
+    margin-top: 0.15rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .status-item {
+    padding: 0.45rem;
+  }
+
+  .status-item span {
+    font-size: 0.72rem;
+    font-size: clamp(0.72rem, -3.264px + 2.24svh, 0.86rem);
+  }
+
+  .status-item strong {
+    font-size: 1.06rem;
+  }
+
+  .status-item.balance-item strong {
+    font-size: 0.96rem;
+  }
+
+  .bet-controls {
+    gap: 0.32rem;
+    margin-top: 0.25rem;
+  }
+
+  .bet-controls .btn.small {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.3rem 0.7rem;
+    font-size: 1.02rem;
+    font-weight: 700;
+  }
+
+  .result {
+    margin-top: 0.15rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .result p {
+    margin: 0.12rem 0;
+    font-size: 0.86rem;
+    font-size: clamp(0.86rem, -1.024px + 2.24svh, 1.0rem);
+    line-height: 1.2;
+  }
+
+  .paytable {
+    margin-top: 0.08rem;
+    padding: 0.52rem;
+  }
+
+  .paytable h2 {
+    font-size: 0.84rem;
+    font-size: clamp(0.84rem, -1.344px + 2.24svh, 0.98rem);
+    margin-bottom: 0.28rem;
+  }
+
+  .paytable ul {
+    padding-left: 0.8rem;
+  }
+
+  .paytable li {
+    font-size: 0.78rem;
+    font-size: clamp(0.78rem, -2.304px + 2.24svh, 0.92rem);
+    padding: 0.06rem 0;
+  }
+
+  .control-buttons .btn {
+    min-height: 46px;
+    font-size: 0.8rem;
+    font-size: clamp(0.8rem, -1.984px + 2.24svh, 0.94rem);
+    padding-top: 0.36rem;
+    padding-bottom: 0.36rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-copyright,
+  .header-promo,
+  .header-version {
+    font-size: 0.66rem;
+    /* Now height-based like every other rule, matching Tahoe21. It was
+       width-based while the copyright read "1992-2026 M. Zack Urlocker", which
+       left almost no horizontal slack; shortening it to "2026 M. Z. Urlocker"
+       freed enough room to scale on height with the rest. */
+    font-size: clamp(0.66rem, -2.112px + 1.92svh, 0.78rem);
+    margin-top: 0.05rem;
+  }
+}
+
+/* Safari/iPhone portrait fine-tuning */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 430px) and (orientation: portrait) {
+    .app {
+      padding: 0.72rem;
+    }
+
+    .topbar {
+      margin-bottom: 0.12rem;
+    }
+
+    .brand h1 {
+      font-size: 1.95rem;
+      line-height: 0.95;
+    }
+
+    .brand-logo {
+      width: 76px;
+      height: 76px;
+    }
+
+    .cards {
+      grid-template-columns: repeat(5, minmax(48px, 1fr));
+      gap: 0.28rem;
+      padding: 0.34rem;
+    }
+
+    .card-slot {
+      min-height: 104px;
+      border-radius: 8px;
+    }
+
+    .card-body {
+      inset: 22% 13% 19% 13%;
+    }
+
+    .pip {
+      font-size: 0.82rem;
+    }
+
+    .ace-logo-center {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+    }
+
+    .status-row {
+      gap: 0.38rem;
+      margin-top: 0.32rem;
+    }
+
+    .status-panel {
+      grid-template-columns: minmax(82px, 98px) minmax(68px, 80px);
+      gap: 0.36rem;
+    }
+
+    .status-item {
+      padding: 0.4rem;
+    }
+
+    .status-item strong {
+      font-size: 1rem;
+    }
+
+    .status-item.balance-item strong {
+      font-size: 0.92rem;
+    }
+
+    .bet-controls .btn.small {
+      min-height: 44px;
+      min-width: 42px;
+      padding: 0.28rem 0.58rem;
+      font-size: 0.98rem;
+    }
+
+    .result {
+      padding: 0.35rem 0.45rem;
+    }
+
+    .result p {
+      font-size: 0.8rem;
+      font-size: clamp(0.8rem, -1.984px + 2.24svh, 0.94rem);
+    }
+
+    .paytable {
+      padding: 0.42rem;
+    }
+
+    .paytable h2 {
+      font-size: 0.8rem;
+      font-size: clamp(0.8rem, -1.984px + 2.24svh, 0.94rem);
+      margin-bottom: 0.22rem;
+    }
+
+    .paytable li {
+      font-size: 0.74rem;
+      font-size: clamp(0.74rem, -2.944px + 2.24svh, 0.88rem);
+      padding: 0.04rem 0;
+    }
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  .brand-logo {
+    width: 103px;
+    height: 103px;
+  }
+
+  .brand p {
+    white-space: nowrap;
+    font-size: 0.72rem;
+  }
+}
+
+/* ── Large screens in portrait (iPad) ────────────────────────────────────────
+   Above 900px the desktop layout applies, but it is content-sized: on a
+   portrait iPad it filled only ~48% of the viewport and left the bottom half as
+   empty felt. Measured on the live layout, scaling alone tops out near 66%
+   before the cards look absurd, so this does two things instead — a moderate
+   enlargement, plus vertical centring so the remaining space sits evenly above
+   and below and reads as composition rather than a layout that ran out.
+   Landscape is untouched: it already fills. */
+@media (min-width: 701px) and (orientation: portrait) {
+  body {
+    font-size: 20px;
+  }
+
+  .app {
+    min-height: 100svh;
+    justify-content: center;
+  }
+
+  /* See Tahoe21: .app is a flex column and will shrink children below their
+     content when the total exceeds the viewport, which causes overlap. */
+  .app > * {
+    flex-shrink: 0;
+  }
+
+  /* Payoffs below the cards, not beside them. Side by side at this width left
+     the five cards as narrow slivers — the table only has ~820px and the rail
+     was taking a third of it. */
+  .table-area {
+    grid-template-columns: 1fr;
+  }
+
+  /* Card height follows width. The slot width is 1fr of five columns, so it
+     grows with the screen — on a 13" iPad that is ~190px — but the height did
+     not follow, leaving the cards squat (~1.24:1 there versus ~1.5:1 on an
+     11"). 5/7 is the real playing-card proportion, so they now scale
+     consistently across every iPad. */
+  .card-slot {
+    min-height: 0;
+    aspect-ratio: 5 / 7;
+  }
+
+  .right-rail {
+    grid-template-rows: auto auto;
+    height: auto;
+  }
+
+  /* No card-slot override. The slot is 115px wide here and already 2.3:1 at its
+     natural height; forcing 340px pushed it to 2.96:1 and the cards looked
+     stretched. Centring plus the larger base font fills the screen without
+     distorting them. */
+}
+
+/* ── Large screens, both orientations (iPad, and Mac windows) ────────────────
+   Two problems this fixes, both visible as "the app doesn't use the screen":
+
+   1. `.app` is capped at max-width 1100px, which on a 13" iPad left unused
+      margin down both sides.
+   2. The sections are content-sized, so the whole app hugged the top and left
+      the bottom third or more as empty felt.
+
+   Centring rather than stretching is deliberate: the sections have their own
+   proportions (a playing card is ~1.4:1) and forcing them taller distorts the
+   cards, which was tried and looked worse. */
+@media (min-width: 701px) {
+  .app {
+    max-width: 1400px;
+    min-height: 100svh;
+    justify-content: center;
+  }
+}
+
+/* ── Small desktop window ────────────────────────────────────────────────────
+   A Mac window can be as small as 760x520. At that size the desktop layout
+   overflowed: measured at 740x650 it wanted 771px of height. The two offenders
+   were the brand logo (162px tall) and the card slots, which `.cards`
+   min-height:260 stretched to 90x331 — a 3.7:1 card when a real one is 1.4:1.
+
+   Bounded so it cannot reach other targets: min-height 501 keeps phones in
+   landscape (~400px tall) out, max-height 760 keeps iPads in landscape
+   (820px) out. Only genuine small desktop windows match. */
+@media (min-width: 701px) and (min-height: 501px) and (max-height: 760px) {
+  body {
+    font-size: 15px;
+  }
+
+  .app {
+    padding: 0.7rem;
+  }
+
+  .brand-logo {
+    width: 76px;
+    height: 76px;
+  }
+
+  .cards {
+    min-height: 0;
+    padding: 0.6rem;
+    gap: 0.5rem;
+  }
+
+  /* Let the card keep playing-card proportions instead of being stretched to
+     fill whatever height the row happens to have. */
+  .card-slot {
+    min-height: 0;
+    aspect-ratio: 5 / 7;
+  }
+}
+
