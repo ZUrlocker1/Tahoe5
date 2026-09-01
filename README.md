@@ -2,6 +2,24 @@
 
 Tahoe 5 is a browser-based video poker game inspired by the original Turbo Pascal shareware version published in 1992.
 
+![Tahoe5 running on macOS](docs/mac-screenshot.png)
+
+## Play It
+
+**In a browser** — [zurlocker1.github.io/Tahoe5](https://zurlocker1.github.io/Tahoe5/). Nothing to
+install, and it works on desktop and mobile.
+
+**On a Mac** — [download Tahoe5.dmg](https://github.com/ZUrlocker1/Tahoe5/releases/latest/download/Tahoe5.dmg).
+A native Mac app: the same game running in a WebKit view, so it gets a real window, a Dock icon, and
+works offline. Requires macOS 14 or later. Signed and notarized, so it opens without Gatekeeper
+complaining.
+
+**On iPhone and iPad** — a native version was built and works, but it is not distributed. Apple does
+not allow individual developers to publish apps whose rating declares simulated gambling; that
+requires enrolling as an organization, which means forming a legal entity. Not worth it for a hobby
+game, so the browser version is how to play on iOS.
+
+
 ## Project Background
 
 This project was based on a Turbo Pascal shareware game I published in 1992. It was made available for DOS, Windows and the Atari Portfolio. Unfortunately, I lost the source code decades ago.
@@ -16,7 +34,6 @@ I did not write or review any code in this version. It just worked!
 
 - A playable web video poker app in `/app`
 - Product requirements document in `/docs/PRD-video-poker-web.md`
-- Version snapshots in `/versions` (`v1.0`, `v1.1`, `v1.2`)
 
 ## Features
 
@@ -37,12 +54,3 @@ python3 -m http.server 8080
 Open:
 
 `http://localhost:8080`
-
-## Version Restore
-
-Use snapshots under `/versions` to restore earlier states:
-
-```bash
-# Example: restore v1.2
-rsync -a --delete /Users/urlocker/Downloads/Vibe1/versions/v1.2/app/ /Users/urlocker/Downloads/Vibe1/app/
-```
